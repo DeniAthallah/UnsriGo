@@ -68,6 +68,7 @@ flutter:
   - assets/riwayat.png
   - assets/rute.png
   - assets/info.png
+  - assets/back.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
