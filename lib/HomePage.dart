@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'InfoPage.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,6 +21,16 @@ class HomePage extends StatelessWidget {
                 // Bagian atas: Welcome dan notifikasi
                 Stack(
                   children: [
+                    
+                    Positioned(
+                      left: 16, // Atur jarak dari kiri
+                      top: 10,  
+                      child: Image.asset(
+                        'assets/back.png', 
+                        width: 30, 
+                        height: 30, 
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.center,
                       child: Column(
@@ -112,7 +123,8 @@ class HomePage extends StatelessWidget {
                           },
                           child: Column(
                             children: [
-                              Image.asset("assets/riwayat.png", width: 80, height: 80),
+                              Image.asset("assets/riwayat.png",
+                                  width: 80, height: 80),
                               SizedBox(height: 5),
                             ],
                           ),
@@ -123,18 +135,25 @@ class HomePage extends StatelessWidget {
                           },
                           child: Column(
                             children: [
-                              Image.asset("assets/rute.png", width: 80, height: 80),
+                              Image.asset("assets/rute.png",
+                                  width: 80, height: 80),
                               SizedBox(height: 5),
                             ],
                           ),
                         ),
                         InkWell(
                           onTap: () {
-                            print("Info tapped");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      InfoPage()), // Ganti dengan halaman info yang baru dibuat
+                            );
                           },
                           child: Column(
                             children: [
-                              Image.asset("assets/info.png", width: 80, height: 80),
+                              Image.asset("assets/info.png",
+                                  width: 80, height: 80),
                               SizedBox(height: 5),
                             ],
                           ),
@@ -167,18 +186,24 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.bus_alert, color: Colors.black),
-                                      SizedBox(width: 8), // Jarak antara ikon dan teks
+                                      Icon(Icons.bus_alert,
+                                          color: Colors.black),
+                                      SizedBox(
+                                          width:
+                                              8), // Jarak antara ikon dan teks
                                       Text(
                                         "Halte A Kampus Bukit",
                                         style: TextStyle(
-                                          fontSize: 16, // Ukuran teks sedikit lebih kecil
+                                          fontSize:
+                                              16, // Ukuran teks sedikit lebih kecil
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -186,7 +211,9 @@ class HomePage extends StatelessWidget {
                                   ),
                                   Text(
                                     "Rp 10.000",
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -204,13 +231,16 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.bus_alert, color: Colors.black),
+                                      Icon(Icons.bus_alert,
+                                          color: Colors.black),
                                       SizedBox(width: 8),
                                       Text(
                                         "Halte B Kampus Bukit",
@@ -223,7 +253,9 @@ class HomePage extends StatelessWidget {
                                   ),
                                   Text(
                                     "Rp 10.000",
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -241,13 +273,16 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 8),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
-                                      Icon(Icons.bus_alert, color: Colors.black),
+                                      Icon(Icons.bus_alert,
+                                          color: Colors.black),
                                       SizedBox(width: 8),
                                       Text(
                                         "Halte C Kampus Bukit",
@@ -260,7 +295,9 @@ class HomePage extends StatelessWidget {
                                   ),
                                   Text(
                                     "Rp 10.000",
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -394,7 +431,8 @@ class BusCard extends StatelessWidget {
                       .map(
                         (bus) => Container(
                           margin: EdgeInsets.symmetric(horizontal: 3),
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(5),
