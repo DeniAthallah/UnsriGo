@@ -2,4 +2,4 @@
 
 Berikut adalah tampilan dari aplikasi Flutter yang telah dibuat:
 
-![Tampilan LoginPage](UI/LoginPage.jpeg){:width="100px"}
+<img src="assets/images/home_page.png" width="100"/>
