@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'InfoPage.dart';
+import 'InfoPage.dart' as info;
+import 'RutePage.dart' as rute;
+import 'pemesanan/BusBookingSelectPage.dart' as Pesan;
+import 'pemesananB/BusBookingSelectPageB.dart' as PesanB;
+import 'pemesananC/BusBookingSelectPageC.dart' as PesanC;
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,14 +25,13 @@ class HomePage extends StatelessWidget {
                 // Bagian atas: Welcome dan notifikasi
                 Stack(
                   children: [
-                    
                     Positioned(
                       left: 16, // Atur jarak dari kiri
-                      top: 10,  
+                      top: 10,
                       child: Image.asset(
-                        'assets/back.png', 
-                        width: 30, 
-                        height: 30, 
+                        'assets/back.png',
+                        width: 30,
+                        height: 30,
                       ),
                     ),
                     Align(
@@ -131,7 +134,11 @@ class HomePage extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            print("Rute tapped");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => rute.Rutepage()),
+                            );
                           },
                           child: Column(
                             children: [
@@ -146,8 +153,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      InfoPage()), // Ganti dengan halaman info yang baru dibuat
+                                  builder: (context) => info.InfoPage()),
                             );
                           },
                           child: Column(
@@ -180,6 +186,7 @@ class HomePage extends StatelessWidget {
                   child: Container(
                     color: Color(0xFFFFC107),
                     child: ListView(
+                      shrinkWrap: true,
                       padding: EdgeInsets.zero,
                       children: [
                         Column(
@@ -196,14 +203,11 @@ class HomePage extends StatelessWidget {
                                     children: [
                                       Icon(Icons.bus_alert,
                                           color: Colors.black),
-                                      SizedBox(
-                                          width:
-                                              8), // Jarak antara ikon dan teks
+                                      SizedBox(width: 8),
                                       Text(
                                         "Halte A Kampus Bukit",
                                         style: TextStyle(
-                                          fontSize:
-                                              16, // Ukuran teks sedikit lebih kecil
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -224,6 +228,8 @@ class HomePage extends StatelessWidget {
                               departureStation: "Palembang",
                               arrivalStation: "Indralaya",
                               availableBuses: ["01", "07", "11"],
+                              destinationPage: Pesan
+                                  .BusBookingSelectPage(), // Halaman tujuan untuk BusCard A
                             ),
                           ],
                         ),
@@ -266,6 +272,8 @@ class HomePage extends StatelessWidget {
                               departureStation: "Palembang",
                               arrivalStation: "Indralaya",
                               availableBuses: ["01", "07", "11"],
+                              destinationPage: PesanB
+                                  .BusBookingSelectPageB(), // Halaman tujuan untuk BusCard B
                             ),
                           ],
                         ),
@@ -308,6 +316,8 @@ class HomePage extends StatelessWidget {
                               departureStation: "Palembang",
                               arrivalStation: "Indralaya",
                               availableBuses: ["01", "07", "11"],
+                              destinationPage:
+                                  PesanC.BusBookingSelectPageC(), // Halaman tujuan untuk BusCard C
                             ),
                           ],
                         ),
@@ -330,6 +340,7 @@ class BusCard extends StatelessWidget {
   final String departureStation;
   final String arrivalStation;
   final List<String> availableBuses;
+  final Widget destinationPage;
 
   BusCard({
     required this.departureTime,
@@ -337,6 +348,7 @@ class BusCard extends StatelessWidget {
     required this.departureStation,
     required this.arrivalStation,
     required this.availableBuses,
+    required this.destinationPage,
   });
 
   @override
@@ -448,7 +460,10 @@ class BusCard extends StatelessWidget {
                 SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    print("Pesan button clicked");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => destinationPage),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF143C5E), // Warna tombol baru
