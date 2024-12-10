@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_unsrigo/LoginPage.dart';
-
+import 'package:provider/provider.dart';
+import 'userprovider.dart';  
+import 'LoginPage.dart'; 
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(), // Mengacu pada LoginPage
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()), 
+      ],
+      child: MaterialApp(
+        title: 'Aplikasi Pemesanan Bus', 
+        theme: ThemeData(
+          primarySwatch: Colors.blue, 
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: const LoginPage(), 
+        debugShowCheckedModeBanner: false, 
+      ),
     );
   }
 }
