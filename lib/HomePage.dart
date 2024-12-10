@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'InfoPage.dart' as info;
 import 'RutePage.dart' as rute;
 import 'pemesanan/BusBookingSelectPage.dart' as Pesan;
+import 'riwayat.dart' as history;
+import 'notification.dart';
+import 'ProfilePage.dart' as akun;
 import 'pemesananB/BusBookingSelectPageB.dart' as PesanB;
 import 'pemesananC/BusBookingSelectPageC.dart' as PesanC;
 
@@ -47,7 +50,7 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Archi",
+                            "UG Bro",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 23,
@@ -59,32 +62,41 @@ class HomePage extends StatelessWidget {
                     ),
                     Positioned(
                       right: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        padding: EdgeInsets.all(8),
-                        child: Stack(
-                          alignment: Alignment.topRight,
-                          children: [
-                            Icon(
-                              Icons.notifications_active,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                            Positioned(
-                              right: 0,
-                              child: Container(
-                                width: 10,
-                                height: 10,
-                                decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  shape: BoxShape.circle,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationPage()),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: EdgeInsets.all(8),
+                          child: Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              Icon(
+                                Icons.notifications_active,
+                                color: Colors.black,
+                                size: 30,
+                              ),
+                              Positioned(
+                                right: 0,
+                                child: Container(
+                                  width: 10,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -122,7 +134,11 @@ class HomePage extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
-                            print("Ubed tapped");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => history.riwayat()),
+                            );
                           },
                           child: Column(
                             children: [
@@ -159,6 +175,22 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             children: [
                               Image.asset("assets/info.png",
+                                  width: 80, height: 80),
+                              SizedBox(height: 5),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => akun.ProfilePage()),
+                            );
+                          },
+                          child: Column(
+                            children: [
+                              Image.asset("assets/akun.png",
                                   width: 80, height: 80),
                               SizedBox(height: 5),
                             ],
@@ -249,7 +281,7 @@ class HomePage extends StatelessWidget {
                                           color: Colors.black),
                                       SizedBox(width: 8),
                                       Text(
-                                        "Halte B Kampus Bukit",
+                                        "Halte A Kampus Bukit",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -293,7 +325,7 @@ class HomePage extends StatelessWidget {
                                           color: Colors.black),
                                       SizedBox(width: 8),
                                       Text(
-                                        "Halte C Kampus Bukit",
+                                        "Halte A Kampus Bukit",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -316,8 +348,8 @@ class HomePage extends StatelessWidget {
                               departureStation: "Palembang",
                               arrivalStation: "Indralaya",
                               availableBuses: ["01", "07", "11"],
-                              destinationPage:
-                                  PesanC.BusBookingSelectPageC(), // Halaman tujuan untuk BusCard C
+                              destinationPage: PesanC
+                                  .BusBookingSelectPageC(), // Halaman tujuan untuk BusCard C
                             ),
                           ],
                         ),
@@ -485,3 +517,4 @@ class BusCard extends StatelessWidget {
     );
   }
 }
+
