@@ -1,13 +1,33 @@
+import 'dart:math'; // Untuk Random
 import 'package:flutter/material.dart';
-import 'package:flutter_application_unsrigo/HomePage.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'userprovider.dart';
+import 'HomePage.dart';
 
 class Selesai extends StatelessWidget {
+  final DateTime waktuPemesanan = DateTime.now();
+  final int selectedSeat;
+
+  Selesai({required this.selectedSeat});
+
+  // Fungsi untuk membuat ID Transaksi acak
+  String generateRandomTransactionId() {
+    const String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    Random random = Random();
+    return List.generate(8, (index) => chars[random.nextInt(chars.length)])
+        .join();
+  }
+
   @override
   Widget build(BuildContext context) {
+    String formattedTime =
+        DateFormat('d MMMM yyyy : HH.mm').format(waktuPemesanan);
+    String transactionId = generateRandomTransactionId(); // ID Transaksi acak
+
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Image.asset(
             'assets/top2.png',
             fit: BoxFit.cover,
@@ -18,22 +38,18 @@ class Selesai extends StatelessWidget {
             padding: EdgeInsets.only(top: 60),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment
-                    .center, // Memastikan elemen berada di tengah secara vertikal
-                crossAxisAlignment: CrossAxisAlignment
-                    .center, // Memastikan elemen berada di tengah secara horizontal
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 150), // Jarak dari atas
-                  // Gambar Berhasil
+                  SizedBox(height: 100),
                   Center(
                     child: Image.asset(
                       'assets/Berhasil.png',
-                      width: 100, // Sesuaikan ukuran
-                      height: 100,
+                      width: 80,
+                      height: 80,
                     ),
                   ),
                   SizedBox(height: 20),
-                  // Text "Pemesanan Berhasil!"
                   Text(
                     "Pemesanan Berhasil!",
                     style: TextStyle(
@@ -43,37 +59,128 @@ class Selesai extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30),
-                  // Tombol "Kembali"
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                      // Kembali ke halaman sebelumnya
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amber,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 16,
-                        horizontal: 40,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Text(
-                      "Kembali",
-                      style: TextStyle(
-                        fontSize: 18,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
                         color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildDetailRow("Halte :", "Halte A Bukit"),
+                          buildDetailRow("Harga :", "Rp.10.000"),
+                          buildDetailRow("Email :",
+                              Provider.of<UserProvider>(context).email),
+                          buildDetailRow("Status :", "Berhasil",
+                              statusColor: Colors.green),
+                          buildDetailRow("Waktu Pesan :", formattedTime),
+                          buildDetailRow("ID Transaksi :", transactionId),
+                          buildDetailRow(
+                              "Nomor Kursi :", selectedSeat.toString()),
+                        ],
                       ),
                     ),
                   ),
+                  SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(width: 20),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Tambahkan transaksi ke riwayat
+                          Provider.of<UserProvider>(context, listen: false)
+                              .addRiwayat({
+                            "tanggal": formattedTime,
+                            "lokasi": "Halte A Bukit",
+                            "nomorKursi": selectedSeat.toString(),
+                            "idTransaksi": transactionId,
+                          });
+
+                          // Tambahkan notifikasi baru ke daftar
+                          Provider.of<UserProvider>(context, listen: false)
+                              .addNotification({
+                            "title": "Halte A Bukit",
+                            "status": "Pemesanan Berhasil",
+                            "time": formattedTime,
+                          });
+
+                          // Navigasi kembali ke halaman Home
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.amber,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 25,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        child: Text(
+                          "Kembali",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildDetailRow(String title, String value, {Color? statusColor}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 2,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 3,
+            child: Text(
+              value,
+              textAlign: TextAlign.end,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: statusColor ?? Colors.black,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
