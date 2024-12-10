@@ -1,251 +1,232 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_unsrigo/HomePage.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
-          // Background gradient
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.white,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
+          // Background Image
+          Image.asset(
+            'assets/top2.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 200,
           ),
-
-          // Top Image behind the UG logo
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              'assets/top2.png', // Path to the image (make sure it's added in pubspec.yaml)
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 200, // Adjust the height as per your need
-            ),
-          ),
-
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(32),
+          Padding(
+            padding: EdgeInsets.only(top: 60),
+            child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 50),
-
-                  Center(
-                      child: Image.asset(
-                        'assets/ug.png', // UG logo path
-                        fit: BoxFit
-                            .contain, // Ensures the logo scales while maintaining aspect ratio
-                        width: MediaQuery.of(context).size.width *
-                            200, // 70% of screen width
-                      ),
-                    ),
-                    
-                  Text(
-                    "WELCOME",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2F2828)),
-                  ),
-                  Text(
-                    "Hello there! , Login to Continue",
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF2F2828)),
-                  ),
-
-                  SizedBox(height: 10),
-
-                  // Container with yellow background for login options and buttons
-                  SizedBox(
-                    width: double.infinity,
-                    child: Container(
-                      padding: const EdgeInsets.all(20.0),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Color(0xFFFFE088), Color(0xFFFFC727)],
+                  Stack(
+                    children: [
+                      // Back Button
+                      Positioned(
+                        left: 16,
+                        top: 10,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context); // Action for back button
+                          },
+                          child: Image.asset(
+                            'assets/back.png', // Path to your back arrow image
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(30),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10),
-                          Text(
-                            'Masuk Menggunakan:',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
+
+                      Align(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Info Icon with Shadow
+                            Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.0),
+                                    blurRadius: 1.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.info,
+                                color: Colors.white,
+                                size: 39,
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 20, height: 15),
-                          // Social Login Buttons
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              // Google Login Button
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  'assets/googlee.png',
-                                  height: 24,
-                                  width: 24,
-                                ),
-                                label: const Text('Google'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.black,
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              // Facebook Login Button
-                              ElevatedButton.icon(
-                                onPressed: () {},
-                                icon: Image.asset(
-                                  'assets/fb.png',
-                                  height: 24,
-                                  width: 24,
-                                ),
-                                label: const Text('Facebook'),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: Colors.black,
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Center(
-                            child: const Text(
-                              'Atau',
+                            SizedBox(width: 8), // Space between icon and text
+                            // Title with Shadow
+                            Text(
+                              "Informasi",
                               style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    blurRadius: 4.0,
+                                    offset: Offset(2.0, 2.0),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 16),
-                          // Email Input
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Email Address',
-                              prefixIcon: Icon(Icons.email),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          // Password Input
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
-                              suffixIcon: Icon(Icons.visibility),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          // Buttons Row (Keluar, Lanjut)
-                          Container(
-                            margin: EdgeInsets.fromLTRB(20, 0, 20, 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 15,
-                                    backgroundColor: Color(0xFF143C5E),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(55),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Keluar',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 16,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 15,
-                                    backgroundColor: Color(0xFF143C5E),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(55),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Lanjut',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
+                      
+                    ],
+                  ),
+                  SizedBox(height: 0),
+                  // Main Content (Logo and Options)
+                  Center(
+                    child: Column(
+                      children: [
+                        // UG Logo
+                        Image.asset(
+                          'assets/ug.png', // Replace with your logo asset path
+                          width: 1000, // Adjusted width for better layout
+                          height: 300,
+                        ),
+                        SizedBox(height: 20),
+                        // Contact UG Section
+                        ExpansionTile(
+                          title: Text(
+                            "Kontak UG",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                      0xFF235680), // Background color blue
+                                  borderRadius: BorderRadius.circular(60),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 1,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  // Directly center the text inside the container
+                                  child: Text(
+                                    "Hubungi UG Bro",
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                      0xFF235680), // Background color blue
+                                  borderRadius: BorderRadius.circular(60),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 1,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  // Directly center the text inside the container
+                                  child: Text(
+                                    "Laporkan Masalah",
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Participating Institutions Section
+                        ExpansionTile(
+                          title: Text(
+                            "Lembaga Berpartisipasi",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          children: [
+                           Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                      0xFF235680), // Background color blue
+                                  borderRadius: BorderRadius.circular(60),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 1,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  // Directly center the text inside the container
+                                  child: Text(
+                                    "Universitas Sriwijaya",
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 12),
+                              child: Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: Color(
+                                      0xFF235680), // Background color blue
+                                  borderRadius: BorderRadius.circular(60),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      blurRadius: 1,
+                                      offset: Offset(2, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Center(
+                                  // Directly center the text inside the container
+                                  child: Text(
+                                    "Damri",
+                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Footer Text 'Unsri GO 2024'
+                        SizedBox(height: 30),
+                        Text(
+                          'Unsri GO 2024',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -257,3 +238,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
