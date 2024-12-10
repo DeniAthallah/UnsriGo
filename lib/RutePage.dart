@@ -20,16 +20,7 @@ class Rutepage extends StatelessWidget {
           ),
 
           // Overlay Image (top2.png remains here)
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset(
-              'assets/top2.png', // Original overlay image
-              fit: BoxFit.cover,
-              height: 300, // Height of the overlay image
-            ),
-          ),
+         
 
           // DraggableScrollableSheet for Bus Schedule List
           DraggableScrollableSheet(
