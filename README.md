@@ -1,8 +1,8 @@
 Anggota Kelompok
-M. Ichsan Farel 		  (09031382227151)
-M. Rafli Maulana		  (09031382227158)
-Deni Athallah Ubaid   (09031382227148)
-M. Rizky Herdiasnyah 	(09031282227108)
+1. M. Ichsan Farel 		   (09031382227151)
+2. M. Rafli Maulana		   (09031382227158)
+3. Deni Athallah Ubaid   (09031382227148)
+4. M. Rizky Herdiasnyah  (09031282227108)
 
 
 ## UI dan alur Transaksi Unsri Go
