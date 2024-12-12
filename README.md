@@ -1,5 +1,11 @@
-![image](https://github.com/user-attachments/assets/abaa59c7-ba55-4bf2-b39d-aa0bca48d7dc)## Tampilan Aplikasi
+Anggota Kelompok
+M. Ichsan Farel 		  (09031382227151)
+M. Rafli Maulana		  (09031382227158)
+Deni Athallah Ubaid   (09031382227148)
+M. Rizky Herdiasnyah 	(09031282227108)
 
+
+## UI dan alur Transaksi Unsri Go
 Berikut adalah tampilan dari aplikasi Flutter yang telah dibuat:
 
 LoginPage :
