@@ -29,7 +29,7 @@ Pada Laman ini melampirkan halaman utama aplikasi ini yang berisikan
 <img src="UI/info.jpeg" width="50"/>
 
 3. tombol akun pengguna
-<img src="UI/akun.jpeg" width="50"/>
+<img src="UI/profil.jpeg" width="50"/>
 
 
 Proses Transaksi Aplikasi
